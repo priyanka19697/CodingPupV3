@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model, authenticate
-from .models import Account
+from .models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 import pdb
@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "password",
             "email",
+            "blogs",
         ]
         extra_kwargs = {
             'password': {'write_only': True}
@@ -23,27 +24,26 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
         return super().create(validated_data)
+    
 
-class UserPutSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = [
-            "password"
-        ]    
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
-
-class AccountGetSerializer(serializers.ModelSerializer):
+class ProfileGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
-        model = Account
+        model = Profile
         fields = "__all__"
         depth = 1
 
-class AccountPostSerializer(serializers.ModelSerializer):
+class ProfilePostSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Account
+        model = Profile
         fields = "__all__"
         depth = 1
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+

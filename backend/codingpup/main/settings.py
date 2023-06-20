@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "accounts",
+    "profiles",
     "rest_framework",
     "phonenumber_field",
+    "blog"
 ]
 
 MEDIA_URL = "/media/"

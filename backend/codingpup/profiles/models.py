@@ -7,10 +7,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save
 
 
-#  in frontend when there is a delete account button - call should be made to delete user endpoint
+#  in frontend when there is a delete Profile button - call should be made to delete user endpoint
 
-class Account(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Profile(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     description = models.CharField(max_length=100, default="", null=True, blank=True)
     city = models.CharField(max_length=100, default="", null=True, blank=True)
     phone = PhoneNumberField(blank=True, default="", null=True)
