@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     "profiles",
     "rest_framework",
     "phonenumber_field",
-    "blog"
+    "blog",
+    # "django_rest_passwordreset"
+    "drf_yasg"
 ]
 
 MEDIA_URL = "/media/"
@@ -88,10 +90,11 @@ WSGI_APPLICATION = "main.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("DB_HOST"),
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASS"),
+        "NAME": "postgres",
+        "USER": "admin",
+        "PASSWORD": "admin",
+        "HOST": 'db',
+        "PORT": 5432
     }
 }
 
@@ -139,3 +142,14 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# swagger settings
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'main.urls.openapi_info',
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic'
+        }
+    }
+}

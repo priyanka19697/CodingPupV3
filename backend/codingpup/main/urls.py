@@ -16,11 +16,21 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from profiles.views  import ChangePasswordView
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from .openapi_info import openapi_info
+
+schema_view = get_schema_view(
+    openapi_info,
+    public=True
+)
 
 urlpatterns = [
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('admin/', admin.site.urls),
     path('api/', include([
         path('profiles/', include('profiles.urls')),
@@ -28,6 +38,8 @@ urlpatterns = [
         path('change-password/', ChangePasswordView.as_view(), name='change-password'),
     ])),
     path('api-auth/', include('rest_framework.urls')),
+
+    
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
