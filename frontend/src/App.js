@@ -6,6 +6,8 @@ import {Login} from "./component/login";
 import {Home} from "./component/Home";
 import {Navigation} from './component/navigation';
 import {Logout} from './component/logout';
+import { CreateBlog } from './component/CreateBlog'
+import { BlogDetail } from './component/BlogDetail';
 function App() {
    return <BrowserRouter>
    <Navigation></Navigation>
@@ -13,6 +15,8 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path='/login' element={<Login/>}/>
       <Route path='/logout' element={<Logout/>}/>
+      <Route path="/blogs/create" element={<CreateBlog/>} />
+      <Route path="/blogs/:id" element={<BlogDetail />} />
    </Routes>
    </BrowserRouter>
 }
