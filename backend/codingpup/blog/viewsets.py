@@ -5,6 +5,7 @@ from .serializers import BlogSerializer
 from rest_framework import serializers, permissions
 
 # Create your views here.
+from kafka import KafkaProducer
 
 class BlogViewSet(ModelViewSet):
     queryset = Blog.objects.all()

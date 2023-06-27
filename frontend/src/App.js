@@ -6,8 +6,10 @@ import {Login} from "./component/login";
 import {Home} from "./component/Home";
 import {Navigation} from './component/navigation';
 import {Logout} from './component/logout';
-import { CreateBlog } from './component/CreateBlog'
-import { BlogDetail } from './component/BlogDetail';
+import { CreateBlog} from './component/Blog/CreateBlog';
+import { BlogDetail } from "./component/Blog/BlogDetail";
+import { EditBlog } from "./component/Blog/EditBlog";
+
 function App() {
    return <BrowserRouter>
    <Navigation></Navigation>
@@ -17,6 +19,7 @@ function App() {
       <Route path='/logout' element={<Logout/>}/>
       <Route path="/blogs/create" element={<CreateBlog/>} />
       <Route path="/blogs/:id" element={<BlogDetail />} />
+      <Route path="/blogs/:id/edit" element={<EditBlog />}/>
    </Routes>
    </BrowserRouter>
 }

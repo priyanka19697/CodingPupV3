@@ -1,5 +1,5 @@
 
-import { BlogList } from "./BlogList";
+import { BlogList } from "./Blog/BlogList";
 
 export const Home = () => {
   return (
